@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ModelService {
@@ -15,6 +16,11 @@ public class ModelService {
     public List<Model> getModels() {
         List<Model> modelList = modelRepository.findAll();
         return modelList;
+    }
+
+    public List<Model> getModelsByIds(Set<Long> ids) {
+        List<Model> models = modelRepository.findAllById(ids);
+        return models;
     }
 
     public Model getModelById(Long id) {

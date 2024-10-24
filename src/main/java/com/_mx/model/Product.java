@@ -16,6 +16,8 @@ public class Product {
     private String name;
     private Double price;
     private String description;
+    private String sku;
+    private boolean availability;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
@@ -58,6 +60,22 @@ public class Product {
 
     public String getDescription() {
         return description;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
+
+    public void setAvailability(boolean availability) {
+        this.availability = availability;
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
+    public boolean isAvailability() {
+        return availability;
     }
 
     public void setCategory(Category category) {

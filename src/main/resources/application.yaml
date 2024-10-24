@@ -8,3 +8,7 @@ spring:
     url: jdbc:mysql://localhost:3306/24mx
     username: root
     password: root
+
+server:
+  error:
+    include-message: always

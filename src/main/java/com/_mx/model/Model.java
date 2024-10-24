@@ -1,5 +1,6 @@
 package com._mx.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -20,6 +21,7 @@ public class Model {
     @JoinColumn(name = "brand_id")
     private Brand brand;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "models")
     private Set<Product> products;
 
