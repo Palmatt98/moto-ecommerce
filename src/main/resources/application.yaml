@@ -1,0 +1,10 @@
+
+spring:
+  application:
+    name: 24mx
+  datasource:
+    #adesso ci colleghiamo al DB
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/24mx
+    username: root
+    password: root
