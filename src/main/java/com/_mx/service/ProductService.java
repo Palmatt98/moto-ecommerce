@@ -31,14 +31,20 @@ public class ProductService {
     }
 
     public Product createProduct(Product product) {
-        Category category = product.getCategory() == null ? categoryService.findByName("Altro") : getCategoryFromBody(product.getCategory());
+        Category category = product.getCategory() == null
+                ? categoryService.findByName("Altro")
+                : getCategoryFromBody(product.getCategory());
         product.setCategory(category);
 
         // [1, 2, 3 ,4]
         // [{id: 1}, {id: 2}, {id: 3}]
         Set<Long> ids = product.getModels().stream()
                 .filter(model -> model != null)
+                //.map() mappa ogni modello prendendo il suo id grazie alla lambda es. {id: 1} diventa 1
+                //dove {id: 1} rapprensenta il modello
+                // e 1 é il risultato di model.getId()
                 .map(model -> model.getId())
+                //il filter é un setaccio, in questo caso manteniamo gli id diversi da null e il resto lo butta
                 .filter(id -> id != null)
                 .collect(Collectors.toSet());
         List<Model> modelList = modelService.getModelsByIds(ids);
@@ -46,6 +52,22 @@ public class ProductService {
         product.setModels(models);
         Product productCreated = productRepository.save(product);
         return productCreated;
+    }
+
+    public Product updateProduct(Long id, Product product) {
+        Product productToUpdate = productRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Non esiste nessun prodotto con l'id " + id));
+
+        productToUpdate.setName(product.getName());
+        productToUpdate.setDescription(product.getDescription());
+        productToUpdate.setPrice(product.getPrice());
+        productToUpdate.setAvailability(product.isAvailability());
+        productToUpdate.setSku(product.getSku());
+        productToUpdate.setCategory(product.getCategory());
+        productToUpdate.setModels(product.getModels());
+
+        Product updatedProduct = productRepository.save(productToUpdate);
+        return updatedProduct;
     }
 
     private Category getCategoryFromBody(Category category) {
@@ -66,7 +88,7 @@ public class ProductService {
     }
 
     public List<Product> getProductsByCategoryId(Long categoryId) {
-       return productRepository.findCategoryById(categoryId);
+       return productRepository.findByCategoryId(categoryId);
 
     }
 

@@ -28,9 +28,16 @@ public class ProductController {
     }
 
     @PostMapping("/products")
-    public ResponseEntity<Product> createProduct(@RequestBody Product product)  {
+    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
+        //deleghiamo al service la logica per eseguire l'azione desiderata come in questocaso il salvataggio del prodotto
         Product productCreated = productService.createProduct(product);
         return new ResponseEntity<>(productCreated, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/products/{id}")
+    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product product) {
+        Product updatedProduct = productService.updateProduct(id, product);
+        return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
     }
 
     @GetMapping("products/category/{categoryId}")
