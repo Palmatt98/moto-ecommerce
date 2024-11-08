@@ -52,4 +52,21 @@ public class Order {
     public List<Product> getProducts() {
         return products;
     }
+
+    public void setPaymentCost(Double paymentCost) {
+        this.paymentCost = paymentCost;
+    }
+
+    public Double getPaymentCost()  {
+        return paymentCost;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp)  {
+        this.timestamp = timestamp;
+    }
+
+    public LocalDateTime getTimestamp()  {
+        return timestamp;
+    }
+
 }

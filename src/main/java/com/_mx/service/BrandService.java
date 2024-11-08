@@ -19,7 +19,7 @@ public class BrandService {
 
     public Brand getBrandById(Long id) {
         //ricordiamo che per l'id serve optional e cosi facendo ce lo da.
-        return  brandRepository.findById(id).orElse(null);
+        return brandRepository.findById(id).orElse(null);
     }
 
     public Brand saveBrand(Brand brand) {
@@ -35,5 +35,9 @@ public class BrandService {
         }
         return existingBrand;
 
+    }
+
+    public void deleteBrand(Long id) {
+        brandRepository.deleteById(id);
     }
 }

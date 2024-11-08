@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 public class ProductController {
     @Autowired
+    //scope singleton
     private ProductService productService;
 
     @GetMapping("/products")

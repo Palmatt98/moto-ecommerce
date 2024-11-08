@@ -15,7 +15,7 @@ public class ModelController {
     @Autowired
     private ModelService modelService;
 
-    @GetMapping("models")
+    @GetMapping("/models")
     public ResponseEntity<List<Model>> getModels() {
         List<Model> models = modelService.getModels();
         return new ResponseEntity<>(models, HttpStatus.OK);
