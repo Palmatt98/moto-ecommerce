@@ -1,16 +1,23 @@
 package com._mx.service;
 
+import com._mx.dto.OrderRequest;
 import com._mx.model.Order;
+import com._mx.model.Product;
 import com._mx.repository.OrderRepository;
+import com._mx.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private ProductRepository productRepository;
 
     public List<Order> getListOrders() {
         List<Order> orderList = orderRepository.findAll();
@@ -23,8 +30,24 @@ public class OrderService {
         return order;
     }
 
-    public Order saveOrder(Order order) {
-        Order orderSaved =  orderRepository.save(order);
+    public Order saveOrder(OrderRequest request) {
+        Order order = new Order();
+        order.setTimestamp(LocalDateTime.now());
+        order.setOrderNumber(request.getOrderNumber());
+        order.setPaymentCost(request.getPaymentCost());
+
+        Set<Long> productIds = request.getProductIds();
+        //TODO prendere da db i prodotti attraverdo il loro id, poi popolare  order.setProducts con i prodotti ricavati dal db7
+        //questa condizione determina che se l'id è n
+        if (productIds != null && !productIds.isEmpty()){
+
+            List<Product> product = productRepository.findAllById(productIds);
+            order.setProducts(product);
+        }else {
+            order.setProducts(List.of());
+        }
+
+        Order orderSaved = orderRepository.save(order);
         return orderSaved;
     }
 

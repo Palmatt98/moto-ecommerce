@@ -57,15 +57,15 @@ public class Order {
         this.paymentCost = paymentCost;
     }
 
-    public Double getPaymentCost()  {
+    public Double getPaymentCost() {
         return paymentCost;
     }
 
-    public void setTimestamp(LocalDateTime timestamp)  {
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 
-    public LocalDateTime getTimestamp()  {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 

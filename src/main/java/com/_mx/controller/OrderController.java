@@ -1,5 +1,6 @@
 package com._mx.controller;
 
+import com._mx.dto.OrderRequest;
 import com._mx.model.Order;
 import com._mx.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class OrderController {
     }
 
     @PostMapping("/orders")
-    public ResponseEntity<Order> saveOrder(@RequestBody Order order) {
+    public ResponseEntity<Order> saveOrder(@RequestBody OrderRequest order) {
         Order orderToSave = orderService.saveOrder(order);
         return new ResponseEntity<>(orderToSave, HttpStatus.CREATED);
     }
