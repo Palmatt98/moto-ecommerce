@@ -6,7 +6,10 @@ import com._mx.model.Product;
 import com._mx.repository.OrderRepository;
 import com._mx.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -37,14 +40,16 @@ public class OrderService {
         order.setPaymentCost(request.getPaymentCost());
 
         Set<Long> productIds = request.getProductIds();
-        //TODO prendere da db i prodotti attraverdo il loro id, poi popolare  order.setProducts con i prodotti ricavati dal db7
-        //questa condizione determina che se l'id è n
-        if (productIds != null && !productIds.isEmpty()){
+        //prendere da db i prodotti attraverdo i loro id, poi popolare  order.setProducts con i prodotti ricavati dal db
 
-            List<Product> product = productRepository.findAllById(productIds);
-            order.setProducts(product);
+        if (!CollectionUtils.isEmpty(productIds)){
+            List<Product> products = productRepository.findAllById(productIds);
+            if (productIds.size() != products.size()) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Non puoi ordinare prodotti non esistenti");
+            }
+            order.setProducts(products);
         }else {
-            order.setProducts(List.of());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Non puoi creare un ordine senza inserire i prodotti");
         }
 
         Order orderSaved = orderRepository.save(order);
