@@ -1,6 +1,6 @@
 package com._mx.repository;
 
-import com._mx.model.Brand;
+import com._mx.entity.Brand;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

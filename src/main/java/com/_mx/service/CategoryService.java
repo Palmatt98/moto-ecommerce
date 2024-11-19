@@ -1,6 +1,6 @@
 package com._mx.service;
 
-import com._mx.model.Category;
+import com._mx.entity.Category;
 import com._mx.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

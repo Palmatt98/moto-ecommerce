@@ -1,6 +1,6 @@
 package com._mx.controller;
 
-import com._mx.model.Model;
+import com._mx.entity.Model;
 import com._mx.service.ModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

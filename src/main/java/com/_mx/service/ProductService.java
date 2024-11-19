@@ -1,8 +1,8 @@
 package com._mx.service;
 
-import com._mx.model.Category;
-import com._mx.model.Model;
-import com._mx.model.Product;
+import com._mx.entity.Category;
+import com._mx.entity.Model;
+import com._mx.entity.Product;
 import com._mx.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

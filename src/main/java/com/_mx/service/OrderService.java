@@ -1,8 +1,10 @@
 package com._mx.service;
 
 import com._mx.dto.OrderRequest;
-import com._mx.model.Order;
-import com._mx.model.Product;
+import com._mx.entity.Order;
+import com._mx.entity.OrderStatus;
+import com._mx.entity.Product;
+import com._mx.enums.OrderStatusType;
 import com._mx.repository.OrderRepository;
 import com._mx.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ import java.util.Set;
 
 @Service
 public class OrderService {
+
+    @Autowired
+    private OrderStatusService orderStatusService;
     @Autowired
     private OrderRepository orderRepository;
     @Autowired
@@ -38,6 +43,10 @@ public class OrderService {
         order.setTimestamp(LocalDateTime.now());
         order.setOrderNumber(request.getOrderNumber());
         order.setPaymentCost(request.getPaymentCost());
+
+        //settiamo lo stato iniziale "PENDING" per tutti i nuovi ordini
+        OrderStatus initialStatus = orderStatusService.findOrderStatusByCode(OrderStatusType.PENDING);
+        order.setStatus(initialStatus);
 
         Set<Long> productIds = request.getProductIds();
         //prendere da db i prodotti attraverdo i loro id, poi popolare  order.setProducts con i prodotti ricavati dal db

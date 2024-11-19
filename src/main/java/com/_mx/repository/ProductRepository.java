@@ -1,6 +1,6 @@
 package com._mx.repository;
 
-import com._mx.model.Product;
+import com._mx.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

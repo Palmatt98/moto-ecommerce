@@ -1,6 +1,6 @@
 package com._mx.controller;
 
-import com._mx.model.Brand;
+import com._mx.entity.Brand;
 import com._mx.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

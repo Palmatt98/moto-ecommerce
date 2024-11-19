@@ -1,6 +1,6 @@
 package com._mx.repository;
 
-import com._mx.model.Order;
+import com._mx.entity.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

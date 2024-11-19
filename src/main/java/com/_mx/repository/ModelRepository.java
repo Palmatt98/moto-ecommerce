@@ -1,6 +1,6 @@
 package com._mx.repository;
 
-import com._mx.model.Model;
+import com._mx.entity.Model;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

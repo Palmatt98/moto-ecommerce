@@ -1,4 +1,4 @@
-package com._mx.model;
+package com._mx.entity;
 
 import jakarta.persistence.*;
 
@@ -21,6 +21,10 @@ public class Order {
     private Double paymentCost;
 
     private LocalDateTime timestamp;
+
+    @ManyToOne
+    @JoinColumn(name = "order_status_id")
+    private OrderStatus status;
 
     @ManyToMany
     @JoinTable(
@@ -67,6 +71,15 @@ public class Order {
 
     public LocalDateTime getTimestamp() {
         return timestamp;
+    }
+
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
+    }
+
+    public OrderStatus getStatus() {
+        return status;
     }
 
 }

@@ -1,6 +1,6 @@
 package com._mx.service;
 
-import com._mx.model.Brand;
+import com._mx.entity.Brand;
 import com._mx.repository.BrandRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
