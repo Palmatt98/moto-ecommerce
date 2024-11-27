@@ -34,14 +34,7 @@ public class OrderController {
         return new ResponseEntity<>(orderToSave, HttpStatus.CREATED);
     }
 
-    //TODO permettere la modifica dell'ordine quando ci saranno gli stati dell'ordine
-    @PutMapping("/orders/{id}")
-    public ResponseEntity<Order> updateOrder(@PathVariable Long id, @RequestBody Order order) {
-        Order orderToUpdate = orderService.updateOrder(id, order);
-        return new ResponseEntity<>(orderToUpdate, HttpStatus.OK);
-    }
 
-    //TODO fare eliminazione logica (colonna 'deleted' booleano sulla tabella orders)
     @DeleteMapping("/orders/{id}")
     public ResponseEntity<Order> deleteOrder(@PathVariable Long id) {
         orderService.deleteOrder(id);

@@ -1,35 +1,28 @@
 package com._mx.dto;
 
-
-import java.util.Set;
+import java.util.List;
 
 public class OrderRequest {
+
     private String orderNumber;
-    private Double paymentCost;
-    private Set<Long> productIds;
+
+    private List<ProductOrderRequest> products;
+
 
     public void setOrderNumber(String orderNumber) {
         this.orderNumber = orderNumber;
     }
 
-    public void setPaymentCost(Double paymentCost) {
-        this.paymentCost = paymentCost;
-    }
-
-    public void setProductIds(Set<Long> productIds) {
-        this.productIds = productIds;
+    public void setProducts(List<ProductOrderRequest> products) {
+        this.products = products;
     }
 
     public String getOrderNumber() {
         return orderNumber;
     }
 
-    public Double getPaymentCost() {
-        return paymentCost;
-    }
-
-    public Set<Long> getProductIds() {
-        return productIds;
+    public List<ProductOrderRequest> getProducts() {
+        return products;
     }
 
 }

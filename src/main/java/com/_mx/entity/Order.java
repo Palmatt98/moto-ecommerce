@@ -22,6 +22,10 @@ public class Order {
 
     private LocalDateTime timestamp;
 
+
+    @Column(name = "deleted_at")
+    private LocalDateTime deletedAt;
+
     @ManyToOne
     @JoinColumn(name = "order_status_id")
     private OrderStatus status;
@@ -80,6 +84,14 @@ public class Order {
 
     public OrderStatus getStatus() {
         return status;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
     }
 
 }

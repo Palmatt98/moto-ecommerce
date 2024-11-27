@@ -14,7 +14,10 @@ public class Product {
     private Long id;
 
     private String name;
+
+    @Column(nullable = false)
     private Double price;
+
     private String description;
     private String sku;
     private boolean availability;
