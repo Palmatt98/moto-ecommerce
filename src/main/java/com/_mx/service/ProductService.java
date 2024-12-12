@@ -3,6 +3,7 @@ package com._mx.service;
 import com._mx.entity.Category;
 import com._mx.entity.Model;
 import com._mx.entity.Product;
+import com._mx.repository.ModelRepository;
 import com._mx.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,9 @@ public class ProductService {
 
     @Autowired
     private ModelService modelService;
+
+    @Autowired
+    private ModelRepository modelRepository;
 
     @Autowired
     private ProductRepository productRepository;
@@ -87,9 +91,39 @@ public class ProductService {
         return product;
     }
 
+    public List<Model> getProductByModelId(Long id) {
+        List<Model> listModel = productRepository.findByProductsId(id);
+        return listModel;
+    }
+
     public List<Product> getProductsByCategoryId(Long categoryId) {
        return productRepository.findByCategoryId(categoryId);
 
+    }
+
+    public void  addModelToProduct(Long productId, Long modelId) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(()-> new ResponseStatusException(HttpStatus.BAD_REQUEST,"Prodotto non trovato"));
+        Model model = modelRepository.findById(modelId)
+                .orElseThrow(()-> new ResponseStatusException(HttpStatus.BAD_REQUEST,"Modello non trovato"));
+
+        product.getModels().add(model);
+
+        productRepository.save(product);
+    }
+
+    public void removeModelToProduct(Long productId, Long modelId){
+        Product product = productRepository.findById(productId)
+                .orElseThrow(()-> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Prodotto non associato al modello"));
+        Model model = modelRepository.findById(modelId)
+                .orElseThrow(()-> new ResponseStatusException(HttpStatus.BAD_REQUEST, "modello non associato al prodotto"));
+
+        if (product.getModels().contains(model)){
+            product.getModels().remove(model);
+            productRepository.save(product);
+        }else{
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "il modello non è associato a questo prodotto");
+        }
     }
 
     public void deleteProduct(Long id){

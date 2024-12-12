@@ -25,6 +25,19 @@ public class Model {
     @ManyToMany(mappedBy = "models")
     private Set<Product> products;
 
+    public class ModelRequest {
+        private Long modelId;
+
+
+        public Long getModelId() {
+            return modelId;
+        }
+
+        public void setModelId(Long modelId) {
+            this.modelId = modelId;
+        }
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

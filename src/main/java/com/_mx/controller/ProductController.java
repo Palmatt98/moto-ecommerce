@@ -1,5 +1,6 @@
 package com._mx.controller;
 
+import com._mx.entity.Model;
 import com._mx.entity.Product;
 import com._mx.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,26 @@ public class ProductController {
         List<Product> products = productService.getProductsByCategoryId(categoryId);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
+
+    @GetMapping("products/{id}/models")
+    public ResponseEntity<List<Model>> getProductByModelId(@PathVariable Long id){
+        List<Model> models = productService.getProductByModelId(id);
+        return new ResponseEntity<>(models, HttpStatus.OK);
+    }
+
+    @PostMapping("products/{productId}/models")
+    public ResponseEntity<Void> addModelToProduct(@PathVariable Long productId, @RequestBody Long modelId) {
+        productService.addModelToProduct(productId, modelId);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("products/{productId}/models/{modelId}")
+    public ResponseEntity<String> removeModelToProduct(@PathVariable Long productId, @PathVariable Long modelId) {
+        productService.removeModelToProduct(productId, modelId);
+        return new ResponseEntity<>("il prodotto è stato eliminato con successo", HttpStatus.OK);
+    }
+
+
 
     @DeleteMapping("products/{id}")
     public ResponseEntity<Product> deleteProductById(@PathVariable Long id) {

@@ -2,6 +2,7 @@ package com._mx.controller;
 
 import com._mx.dto.OrderRequest;
 import com._mx.entity.Order;
+import com._mx.entity.Product;
 import com._mx.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,12 @@ public class OrderController {
     public ResponseEntity<Order> getOrderById(@PathVariable Long id) {
         Order order = orderService.getOrderById(id);
         return new ResponseEntity<>(order, HttpStatus.OK);
+    }
+
+    @GetMapping("/orders/{id}/products")
+    public ResponseEntity<List<Product>> getProductsByOrderId(@PathVariable Long id) {
+        List<Product> products = orderService.getProductsByOrderId(id);
+        return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
     @PostMapping("/orders")

@@ -88,6 +88,11 @@ public class OrderService {
         return orderSaved;
     }
 
+    public List<Product> getProductsByOrderId(Long id) {
+        List<Product> products = orderRepository.findProductsById(id);
+        return products;
+    }
+
     public Order deleteOrder(Long id) {
         //TODO logical delete dell'ordine
         //TODO fare eliminazione logica (colonna 'deleted_at' di tipo DATETIME sulla tabella orders, accettare l'eliminazione solo se in stato pending, settare status a canceled)
